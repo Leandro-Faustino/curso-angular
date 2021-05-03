@@ -31,6 +31,7 @@ export class CadastroFilmesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //recebe id da rota
     this.id = this.activatedRoute.snapshot.params['id'];
     if (this.id) {
       this.filmeService.visualizar(this.id)
@@ -43,15 +44,17 @@ export class CadastroFilmesComponent implements OnInit {
 
   }
 
+  //marca os campos como clicados,se form  tiver invalido para.
   submit(): void {
     this.cadastro.markAllAsTouched();
     if (this.cadastro.invalid) {
       return;
     }
 
+    // filme retorna todos oc campos do cadastro,se tiver id =edita,senao salva
     const filme = this.cadastro.getRawValue() as Filme;
     if (this.id) {
-      filme.id = this.id;
+      filme.id = this.id;//passamos o id pq nao vem contem no cadastro
       this.editar(filme);
     } else {
       this.salvar(filme);
@@ -97,7 +100,11 @@ export class CadastroFilmesComponent implements OnInit {
           possuirBtnFechar: true
         } as Alerta
       };
+      // abre a mmodal e passa dados da congig do modal
       const dialogRef = this.dialog.open(AlertaComponent, config);
+
+      //depois que fechar,de resultado for true retorna para listagem, senao limpa
+      //paramentro vindo do retorno do btn co componente
       dialogRef.afterClosed().subscribe((opcao: boolean) => {
         if (opcao) {
           this.router.navigateByUrl('filmes');
@@ -106,6 +113,8 @@ export class CadastroFilmesComponent implements OnInit {
         }
       });
     },
+
+    //possivel erro
     () => {
       const config = {
         data: {

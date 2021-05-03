@@ -8,7 +8,7 @@ import { Alerta } from '../../models/alerta';
   styleUrls: ['./alerta.component.css']
 })
 export class AlertaComponent implements OnInit {
-
+// informações da modal tipo Alerta
   alerta = {
     titulo: 'Sucesso!',
     descricao: 'Seu registro foi cadastrado com sucesso!',
@@ -23,6 +23,7 @@ export class AlertaComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: Alerta) { }
 
   ngOnInit() {
+    //se existir dados de quem chamou carrega dados,senao carrega dados padrao
     if (this.data) {
       this.alerta.titulo = this.data.titulo || this.alerta.titulo;
       this.alerta.descricao = this.data.descricao || this.alerta.descricao;

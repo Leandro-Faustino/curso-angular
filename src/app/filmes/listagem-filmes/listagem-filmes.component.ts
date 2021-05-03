@@ -12,8 +12,10 @@ import { ConfigPrams } from 'src/app/shared/models/config-prams';
   styleUrls: ['./listagem-filmes.component.scss']
 })
 export class ListagemFilmesComponent implements OnInit {
+  //foto padrao
   readonly semFoto = 'https://www.termoparts.com.br/wp-content/uploads/2017/10/no-image.jpg';
 
+  //paginação
   config: ConfigPrams = {
     pagina: 0,
     limite: 4
@@ -32,6 +34,7 @@ export class ListagemFilmesComponent implements OnInit {
       genero: ['']
     });
 
+    //fica observando mudanças do campo texto
     this.filtrosListagem.get('texto').valueChanges
     .pipe(debounceTime(400))
     .subscribe((val: string) => {
@@ -39,6 +42,7 @@ export class ListagemFilmesComponent implements OnInit {
       this.resetarConsulta();
     });
 
+    //fica observando mudanças do campo genero
     this.filtrosListagem.get('genero').valueChanges.subscribe((val: string) => {
       this.config.campo = {tipo: 'genero', valor: val};
       this.resetarConsulta();
@@ -49,6 +53,7 @@ export class ListagemFilmesComponent implements OnInit {
     this.listarFilmes();
   }
 
+  //toda vez que nossa vw chega a 80%,lista mais filmes
   onScroll(): void {
     this.listarFilmes();
   }

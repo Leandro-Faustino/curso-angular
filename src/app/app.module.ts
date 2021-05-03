@@ -29,7 +29,7 @@ import { AlertaComponent } from './shared/components/alerta/alerta.component';
     MaterialModule,
     AppRoutingModule
   ],
-  entryComponents: [AlertaComponent],
+  entryComponents: [AlertaComponent],//carrega o alerta quando a app inicializa
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt' }],
   bootstrap: [AppComponent]
 })
